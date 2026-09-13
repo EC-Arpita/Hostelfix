@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HostelFix | Hostel Complaint Management</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:Arial,Helvetica,sans-serif;color:#172033;background:#f7f8fc;line-height:1.6}
+    a{text-decoration:none;color:inherit}
+    button{font:inherit;cursor:pointer}
+    .container{width:min(1120px,92%);margin:auto}
+
+    /* Header */
+    header{
+      height:70px;background:#fff;border-bottom:1px solid #e5e7eb;
+      display:flex;align-items:center;position:sticky;top:0;z-index:20
+    }
+    .nav{display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:9px;font-size:21px;font-weight:700}
+    .logo-mark{
+      width:34px;height:34px;background:#4f46e5;color:#fff;border-radius:8px;
+      display:grid;place-items:center;font-size:17px
+    }
+    .logo span{color:#4f46e5}
+    .links{display:flex;gap:28px;margin-left:80px}
+    .links a{font-size:14px;color:#586174}
+    .links a:hover{color:#4f46e5}
+    .nav-buttons{display:flex;gap:9px}
+    .btn{
+      border:1px solid #d9ddea;background:#fff;color:#273044;
+      padding:10px 17px;border-radius:7px;font-size:14px;font-weight:600
+    }
+    .btn:hover{background:#f4f5f9}
+    .btn.primary{background:#4f46e5;border-color:#4f46e5;color:#fff}
+    .btn.primary:hover{background:#4338ca}
+    .menu{display:none;background:none;border:0;font-size:25px}
+
+    /* Hero */
+    .hero{background:#f0f2ff;padding:88px 0 78px;border-bottom:1px solid #e1e4f4}
+    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:65px;align-items:center}
+    .small-title{
+      display:inline-block;color:#4f46e5;background:#fff;border:1px solid #dfe2ff;
+      padding:6px 11px;border-radius:5px;font-size:12px;font-weight:600;margin-bottom:20px
+    }
+    h1{font-size:48px;line-height:1.12;letter-spacing:-1.4px;margin-bottom:20px}
+    h1 span{color:#4f46e5}
+    .hero p{font-size:17px;color:#5e687c;max-width:560px;margin-bottom:28px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .note{margin-top:18px;color:#737d90;font-size:12px}
+
+    /* Small dashboard preview */
+    .preview{
+      background:#fff;border:1px solid #dfe3ec;border-radius:13px;
+      box-shadow:0 14px 35px rgba(30,41,59,.10);overflow:hidden
+    }
+    .preview-top{background:#20283a;color:#fff;padding:14px 17px;display:flex;justify-content:space-between;font-size:12px}
+    .preview-body{padding:20px}
+    .preview-title{font-size:18px;font-weight:700;margin-bottom:16px}
+    .mini-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:15px}
+    .mini-stat{border:1px solid #e7e9ef;border-radius:8px;padding:11px 7px;text-align:center}
+    .mini-stat strong{display:block;font-size:19px;color:#4f46e5}
+    .mini-stat small{font-size:10px;color:#788196}
+    .issue{
+      display:flex;justify-content:space-between;align-items:center;
+      border-top:1px solid #edf0f4;padding:13px 3px;font-size:12px;gap:12px
+    }
+    .issue small{display:block;color:#8a93a4;margin-top:2px}
+    .status{font-size:10px;padding:4px 7px;border-radius:12px;white-space:nowrap}
+    .progress{background:#fff4d8;color:#9a6b00}
+    .done{background:#e8f8ef;color:#147a42}
+    .assigned{background:#e9efff;color:#3659b7}
+
+    /* Sections */
+    section{padding:76px 0}
+    .section-head{text-align:center;margin-bottom:42px}
+    .section-head h2{font-size:31px;margin-bottom:8px}
+    .section-head p{color:#697387;font-size:14px}
+    .stats{background:#fff;padding:30px 0}
+    .stat-row{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #e5e7eb;border-radius:10px;overflow:hidden}
+    .stat{text-align:center;padding:20px;border-right:1px solid #e5e7eb}
+    .stat:last-child{border-right:0}
+    .stat strong{font-size:28px;color:#4f46e5}
+    .stat p{font-size:12px;color:#727b8d}
+
+    .steps{background:#f7f8fc}
+    .step-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .step{background:#fff;border:1px solid #e3e6ed;border-radius:10px;padding:25px 20px}
+    .number{width:32px;height:32px;border-radius:50%;background:#4f46e5;color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px;margin-bottom:18px}
+    .step h3{font-size:16px;margin-bottom:8px}
+    .step p{font-size:13px;color:#6b7485}
+
+    .feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .feature{background:#fff;border:1px solid #e3e6ed;border-radius:10px;padding:22px}
+    .feature-icon{font-size:22px;margin-bottom:13px}
+    .feature h3{font-size:15px;margin-bottom:7px}
+    .feature p{font-size:12px;color:#6d7687}
+
+    .category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .category{background:#fff;border:1px solid #e2e5eb;padding:18px;border-radius:9px}
+    .category:hover{border-color:#9da4f4}
+    .category b{display:block;font-size:14px;margin-top:8px}
+    .category span{font-size:22px}
+
+    .cta{background:#4f46e5;color:#fff;text-align:center;padding:65px 20px}
+    .cta h2{font-size:30px;margin-bottom:10px}
+    .cta p{color:#dfe1ff;font-size:14px;margin-bottom:24px}
+    .white{background:#fff;color:#4f46e5;border-color:#fff}
+
+    footer{background:#20283a;color:#b8bfcd;padding:45px 0 25px}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:50px;margin-bottom:35px}
+    footer .logo{color:#fff;margin-bottom:12px}
+    footer .logo span{color:#a9afff}
+    footer p,footer a{font-size:12px;color:#9da6b7}
+    footer h4{font-size:13px;color:#fff;margin-bottom:12px}
+    footer li{margin-bottom:7px}
+    .copyright{border-top:1px solid #343d50;padding-top:18px;font-size:11px;color:#858fa1}
+
+    @media(max-width:850px){
+      .links{display:none}.nav-buttons{display:none}.menu{display:block}
+      .hero-grid{grid-template-columns:1fr}.preview{max-width:650px}
+      h1{font-size:40px}.step-grid,.feature-grid{grid-template-columns:repeat(2,1fr)}
+      .category-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:560px){
+      .hero{padding:60px 0}.hero p{font-size:15px}h1{font-size:34px}
+      .mini-stats{grid-template-columns:repeat(2,1fr)}
+      .stat-row{grid-template-columns:repeat(2,1fr)}
+      .stat{border-bottom:1px solid #e5e7eb}.stat:nth-child(2){border-right:0}
+      .step-grid,.feature-grid{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr;gap:25px}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="#" class="logo"><div class="logo-mark">H</div>Hostel<span>Fix</span></a>
+    <nav class="links">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#categories">Categories</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-buttons">
+      <button class="btn" onclick="openAuth('login')">Login</button>
+      <button class="btn primary" onclick="openAuth('register')">Register</button>
+    </div>
+    <button class="menu" onclick="openAuth('login')">☰</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="small-title">HOSTEL COMPLAINT MANAGEMENT</div>
+        <h1>Hostel problems?<br><span>Report them simply.</span></h1>
+        <p>HostelFix gives students one place to report maintenance issues, check complaint status and receive updates without repeatedly visiting the office.</p>
+        <div class="hero-actions">
+          <button class="btn primary" onclick="openAuth('register')">Report an Issue</button>
+          <a class="btn" href="#how">See How It Works</a>
+        </div>
+        <div class="note">For students • Easy to use • Track your complaint</div>
+      </div>
+
+      <div class="preview">
+        <div class="preview-top"><span>HostelFix</span><span>Student Dashboard</span></div>
+        <div class="preview-body">
+          <div class="preview-title">Complaint Overview</div>
+          <div class="mini-stats">
+            <div class="mini-stat"><strong>12</strong><small>Total</small></div>
+            <div class="mini-stat"><strong>03</strong><small>Pending</small></div>
+            <div class="mini-stat"><strong>04</strong><small>Working</small></div>
+            <div class="mini-stat"><strong>05</strong><small>Resolved</small></div>
+          </div>
+          <div class="issue"><div>Water leakage<small>Room 204 · HF1025</small></div><span class="status progress">In progress</span></div>
+          <div class="issue"><div>Power problem<small>Block B · HF1024</small></div><span class="status assigned">Assigned</span></div>
+          <div class="issue"><div>Wi-Fi not working<small>Room 108 · HF1023</small></div><span class="status done">Resolved</span></div>
+          <div class="issue"><div>Broken chair<small>Room 311 · HF1022</small></div><span class="status progress">Pending</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="container stat-row">
+      <div class="stat"><strong>500+</strong><p>Issues Reported</p></div>
+      <div class="stat"><strong>350+</strong><p>Issues Resolved</p></div>
+      <div class="stat"><strong>95%</strong><p>Student Satisfaction</p></div>
+      <div class="stat"><strong>24/7</strong><p>Digital Access</p></div>
+    </div>
+  </section>
+
+  <section class="steps" id="how">
+    <div class="container">
+      <div class="section-head"><h2>How it works</h2><p>A simple process from complaint to resolution.</p></div>
+      <div class="step-grid">
+        <div class="step"><div class="number">1</div><h3>Report</h3><p>Choose a category, describe the problem and submit your complaint.</p></div>
+        <div class="step"><div class="number">2</div><h3>Review</h3><p>The hostel authority checks the complaint and assigns it to the concerned staff.</p></div>
+        <div class="step"><div class="number">3</div><h3>Track</h3><p>Students can check the current status of their complaint.</p></div>
+        <div class="step"><div class="number">4</div><h3>Resolve</h3><p>After the issue is fixed, the complaint is marked resolved and feedback can be given.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="container">
+      <div class="section-head"><h2>Useful features</h2><p>Features planned around common hostel problems.</p></div>
+      <div class="feature-grid">
+        <div class="feature"><div class="feature-icon">📝</div><h3>Easy Reporting</h3><p>Submit a complaint with its category, description and priority.</p></div>
+        <div class="feature"><div class="feature-icon">📍</div><h3>Status Tracking</h3><p>Know whether your complaint is pending, assigned, in progress or resolved.</p></div>
+        <div class="feature"><div class="feature-icon">🔔</div><h3>Notifications</h3><p>Keep students updated when the complaint status changes.</p></div>
+        <div class="feature"><div class="feature-icon">📊</div><h3>Admin Management</h3><p>Authorities can manage complaints and understand recurring issues.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="categories" style="background:#fff">
+    <div class="container">
+      <div class="section-head"><h2>Complaint categories</h2><p>Common areas where hostel complaints can be raised.</p></div>
+      <div class="category-grid">
+        <div class="category"><span>💡</span><b>Electricity</b></div>
+        <div class="category"><span>🚰</span><b>Plumbing / Water</b></div>
+        <div class="category"><span>📶</span><b>Wi-Fi / Internet</b></div>
+        <div class="category"><span>🪑</span><b>Furniture</b></div>
+        <div class="category"><span>🧹</span><b>Cleaning</b></div>
+        <div class="category"><span>🍽️</span><b>Mess</b></div>
+        <div class="category"><span>🔒</span><b>Security</b></div>
+        <div class="category"><span>🔧</span><b>Other Maintenance</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="contact">
+    <div class="container">
+      <h2>Have a hostel problem?</h2>
+      <p>Report it through HostelFix and keep track of what happens next.</p>
+      <button class="btn white" onclick="openAuth('register')">Create Student Account</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo"><div class="logo-mark">H</div>Hostel<span>Fix</span></div>
+        <p>A student-focused platform for reporting and managing hostel maintenance complaints.</p>
+      </div>
+      <div>
+        <h4>Platform</h4>
+        <ul><li><a href="#how">How it works</a></li><li><a href="#features">Features</a></li><li><a href="#categories">Categories</a></li></ul>
+      </div>
+      <div>
+        <h4>Project</h4>
+        <ul><li><a href="#contact">Contact</a></li><li><a href="#">Student Portal</a></li><li><a href="#">Admin Portal</a></li></ul>
+      </div>
+    </div>
+    <div class="copyright">© 2026 HostelFix · MCA Frontend Web Development Project</div>
+  </div>
+</footer>
+
+<script>
+  function openAuth(type){
+    window.location.href = "auth.html#" + type;
+  }
+</script>
+</body>
+</html>
