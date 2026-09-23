@@ -1,193 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HostelFix | Login / Register</title>
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:Arial,Helvetica,sans-serif;background:#f4f5f9;color:#1d2638;min-height:100vh}
-    button,input{font:inherit}
-    a{text-decoration:none}
-    .page{min-height:100vh;display:grid;grid-template-columns:43% 57%}
-
-    /* Left side */
-    .intro{background:#4f46e5;color:#fff;padding:45px 55px;display:flex;flex-direction:column;justify-content:space-between}
-    .brand{display:flex;align-items:center;gap:9px;font-size:21px;font-weight:700}
-    .brand-mark{width:35px;height:35px;background:#fff;color:#4f46e5;border-radius:8px;display:grid;place-items:center}
-    .intro-main{max-width:430px}
-    .intro h1{font-size:38px;line-height:1.18;margin-bottom:17px}
-    .intro p{font-size:15px;color:#e1e3ff;line-height:1.7}
-    .points{margin-top:28px;display:grid;gap:13px}
-    .point{display:flex;align-items:center;gap:11px;font-size:13px;color:#f1f2ff}
-    .check{width:25px;height:25px;border:1px solid rgba(255,255,255,.3);border-radius:6px;display:grid;place-items:center}
-    .intro-foot{font-size:11px;color:#c6c9f4}
-
-    /* Form side */
-    .form-side{display:flex;align-items:center;justify-content:center;padding:35px}
-    .box{width:min(440px,100%);background:#fff;border:1px solid #e0e3ea;border-radius:11px;padding:35px;box-shadow:0 10px 28px rgba(20,30,50,.07)}
-    .back{font-size:12px;color:#6b7486;margin-bottom:25px;display:inline-block}
-    .heading{margin-bottom:22px}
-    .heading h2{font-size:27px;margin-bottom:6px}
-    .heading p{font-size:13px;color:#737d8f}
-
-    .tabs{display:grid;grid-template-columns:1fr 1fr;background:#f1f2f6;border-radius:7px;padding:3px;margin-bottom:23px}
-    .tab{border:0;background:transparent;padding:9px;border-radius:5px;color:#727b8b;font-weight:600;font-size:13px}
-    .tab.active{background:#fff;color:#4f46e5;box-shadow:0 1px 4px rgba(0,0,0,.08)}
-
-    form{display:grid;gap:15px}
-    .field{display:grid;gap:6px}
-    label{font-size:12px;font-weight:600;color:#30394b}
-    input{
-      width:100%;padding:11px 12px;border:1px solid #d9dde6;border-radius:6px;
-      outline:none;color:#20293a;background:#fff
-    }
-    input:focus{border-color:#7770e8;box-shadow:0 0 0 3px rgba(79,70,229,.08)}
-    .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .row{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#737d8e}
-    .remember{display:flex;align-items:center;gap:7px}
-    .remember input{width:auto}
-    .link{color:#4f46e5;font-weight:600}
-    .submit{
-      border:0;background:#4f46e5;color:#fff;border-radius:7px;padding:12px;
-      font-weight:700;margin-top:3px
-    }
-    .submit:hover{background:#4338ca}
-    .terms{font-size:11px;color:#777f8e;line-height:1.5}
-    .message{display:none;padding:10px;background:#edf9f2;color:#197345;border:1px solid #c8ead7;border-radius:6px;font-size:12px}
-    .switch-text{text-align:center;color:#747d8d;font-size:12px;margin-top:18px}
-    .switch-text button{border:0;background:none;color:#4f46e5;font-weight:700}
-    .admin{border-top:1px solid #eceef2;margin-top:22px;padding-top:17px;text-align:center;font-size:11px;color:#81899a}
-
-    @media(max-width:760px){
-      .page{grid-template-columns:1fr}.intro{display:none}.form-side{padding:20px}
-      .box{padding:27px}.two{grid-template-columns:1fr}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HostelFix | Login / Register</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;background:#f4f5f9;color:#1d2638;min-height:100vh}
+button,input{font:inherit}a{text-decoration:none}
+.page{min-height:100vh;display:grid;grid-template-columns:43% 57%}
+.intro{background:#4f46e5;color:#fff;padding:45px 55px;display:flex;flex-direction:column;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:9px;font-size:21px;font-weight:700}
+.brand-mark{width:35px;height:35px;background:#fff;color:#4f46e5;border-radius:8px;display:grid;place-items:center}
+.intro-main{max-width:430px}
+.intro h1{font-size:38px;line-height:1.18;margin-bottom:17px}
+.intro p{font-size:15px;color:#e1e3ff;line-height:1.7}
+.points{margin-top:28px;display:grid;gap:13px}
+.point{display:flex;align-items:center;gap:11px;font-size:13px;color:#f1f2ff}
+.check{width:25px;height:25px;border:1px solid rgba(255,255,255,.3);border-radius:6px;display:grid;place-items:center}
+.intro-foot{font-size:11px;color:#c6c9f4}
+.form-side{display:flex;align-items:center;justify-content:center;padding:35px}
+.box{width:min(440px,100%);background:#fff;border:1px solid #e0e3ea;border-radius:11px;padding:35px;box-shadow:0 10px 28px rgba(20,30,50,.07)}
+.back{font-size:12px;color:#6b7486;margin-bottom:25px;display:inline-block}
+.heading{margin-bottom:22px}.heading h2{font-size:27px;margin-bottom:6px}.heading p{font-size:13px;color:#737d8f}
+.tabs{display:grid;grid-template-columns:1fr 1fr;background:#f1f2f6;border-radius:7px;padding:3px;margin-bottom:23px}
+.tab{border:0;background:transparent;padding:9px;border-radius:5px;color:#727b8b;font-weight:600;font-size:13px;cursor:pointer}
+.tab.active{background:#fff;color:#4f46e5;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+form{display:grid;gap:15px}.field{display:grid;gap:6px}
+label{font-size:12px;font-weight:600;color:#30394b}
+input{width:100%;padding:11px 12px;border:1px solid #d9dde6;border-radius:6px;outline:none;color:#20293a;background:#fff}
+input:focus{border-color:#7770e8;box-shadow:0 0 0 3px rgba(79,70,229,.08)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#737d8e}
+.remember{display:flex;align-items:center;gap:7px}.remember input{width:auto}
+.link{color:#4f46e5;font-weight:600}
+.submit{border:0;background:#4f46e5;color:#fff;border-radius:7px;padding:12px;font-weight:700;margin-top:3px;cursor:pointer}
+.submit:hover{background:#4338ca}
+.terms{font-size:11px;color:#777f8e;line-height:1.5}
+.message{display:none;padding:10px;background:#edf9f2;color:#197345;border:1px solid #c8ead7;border-radius:6px;font-size:12px}
+.switch-text{text-align:center;color:#747d8d;font-size:12px;margin-top:18px}
+.switch-text button{border:0;background:none;color:#4f46e5;font-weight:700;cursor:pointer}
+.admin{border-top:1px solid #eceef2;margin-top:22px;padding-top:17px;text-align:center;font-size:11px;color:#81899a}
+.login-note{margin-top:12px;text-align:center;font-size:11px;color:#8a92a1;line-height:1.5}
+@media(max-width:760px){.page{grid-template-columns:1fr}.intro{display:none}.form-side{padding:20px}.box{padding:27px}.two{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
-
 <div class="page">
-  <aside class="intro">
-    <div class="brand"><div class="brand-mark">H</div>HostelFix</div>
+<aside class="intro">
+<div class="brand"><div class="brand-mark">H</div>HostelFix</div>
+<div class="intro-main">
+<h1>Make hostel complaints easier to manage.</h1>
+<p>Use HostelFix to report everyday hostel issues and keep a record of what is happening with your complaint.</p>
+<div class="points">
+<div class="point"><span class="check">✓</span> Submit complaints online</div>
+<div class="point"><span class="check">✓</span> Check complaint status</div>
+<div class="point"><span class="check">✓</span> Get updates from the hostel</div>
+<div class="point"><span class="check">✓</span> Give feedback after resolution</div>
+</div>
+</div>
+<div class="intro-foot">Student portal · HostelFix · 2026</div>
+</aside>
 
-    <div class="intro-main">
-      <h1>Make hostel complaints easier to manage.</h1>
-      <p>Use HostelFix to report everyday hostel issues and keep a record of what is happening with your complaint.</p>
-      <div class="points">
-        <div class="point"><span class="check">✓</span> Submit complaints online</div>
-        <div class="point"><span class="check">✓</span> Check complaint status</div>
-        <div class="point"><span class="check">✓</span> Get updates from the hostel</div>
-        <div class="point"><span class="check">✓</span> Give feedback after resolution</div>
-      </div>
-    </div>
+<main class="form-side">
+<div class="box">
+<a class="back" href="landing.html">← Back to HostelFix</a>
+<div class="heading">
+<h2 id="title">Welcome back</h2>
+<p id="subtitle">Login to continue to your student account.</p>
+</div>
 
-    <div class="intro-foot">Student portal · HostelFix · 2026</div>
-  </aside>
+<div class="tabs">
+<button class="tab active" id="loginTab" type="button" onclick="showForm('login')">Login</button>
+<button class="tab" id="registerTab" type="button" onclick="showForm('register')">Register</button>
+</div>
 
-  <main class="form-side">
-    <div class="box">
-      <a class="back" href="landing.html">← Back to HostelFix</a>
+<div id="loginForm">
+<form onsubmit="loginDemo(event)">
+<div class="field"><label>Email address</label><input id="loginEmail" type="email" placeholder="student@college.edu" required></div>
+<div class="field"><label>Password</label><input id="loginPassword" type="password" placeholder="Enter your password" required></div>
+<div class="row">
+<label class="remember"><input type="checkbox"> Remember me</label>
+<a class="link" href="#" onclick="return false">Forgot password?</a>
+</div>
+<button class="submit" type="submit">Login to HostelFix</button>
+<div class="message" id="loginMessage">Login successful. Opening your student dashboard...</div>
+</form>
+<div class="switch-text">Don't have an account? <button type="button" onclick="showForm('register')">Create one</button></div>
+</div>
 
-      <div class="heading">
-        <h2 id="title">Welcome back</h2>
-        <p id="subtitle">Login to continue to your student account.</p>
-      </div>
+<div id="registerForm" style="display:none">
+<form onsubmit="registerDemo(event)">
+<div class="two">
+<div class="field"><label>Full name</label><input type="text" placeholder="Your name" required></div>
+<div class="field"><label>Student ID</label><input type="text" placeholder="Student ID" required></div>
+</div>
+<div class="field"><label>Email address</label><input type="email" placeholder="student@college.edu" required></div>
+<div class="field"><label>Hostel / Block</label><input type="text" placeholder="e.g. Block A" required></div>
+<div class="two">
+<div class="field"><label>Password</label><input id="registerPassword" type="password" placeholder="Create password" required></div>
+<div class="field"><label>Confirm password</label><input id="confirmPassword" type="password" placeholder="Repeat password" required></div>
+</div>
+<label class="remember terms"><input type="checkbox" required> I agree to the basic terms of HostelFix.</label>
+<button class="submit" type="submit">Create Student Account</button>
+<div class="message" id="registerMessage">Account created successfully. Opening your student dashboard...</div>
+</form>
+<div class="switch-text">Already have an account? <button type="button" onclick="showForm('login')">Login here</button></div>
+</div>
 
-      <div class="tabs">
-        <button class="tab active" id="loginTab" onclick="showForm('login')">Login</button>
-        <button class="tab" id="registerTab" onclick="showForm('register')">Register</button>
-      </div>
-
-      <div id="loginForm">
-        <form onsubmit="loginDemo(event)">
-          <div class="field">
-            <label>Email address</label>
-            <input type="email" placeholder="student@college.edu" required>
-          </div>
-          <div class="field">
-            <label>Password</label>
-            <input type="password" placeholder="Enter your password" required>
-          </div>
-          <div class="row">
-            <label class="remember"><input type="checkbox"> Remember me</label>
-            <a class="link" href="#" onclick="return false">Forgot password?</a>
-          </div>
-          <button class="submit" type="submit">Login to HostelFix</button>
-          <div class="message" id="loginMessage">Demo login submitted successfully.</div>
-        </form>
-        <div class="switch-text">Don't have an account?
-          <button onclick="showForm('register')">Create one</button>
-        </div>
-      </div>
-
-      <div id="registerForm" style="display:none">
-        <form onsubmit="registerDemo(event)">
-          <div class="two">
-            <div class="field">
-              <label>Full name</label>
-              <input type="text" placeholder="Your name" required>
-            </div>
-            <div class="field">
-              <label>Student ID</label>
-              <input type="text" placeholder="Student ID" required>
-            </div>
-          </div>
-          <div class="field">
-            <label>Email address</label>
-            <input type="email" placeholder="student@college.edu" required>
-          </div>
-          <div class="field">
-            <label>Hostel / Block</label>
-            <input type="text" placeholder="e.g. Block A" required>
-          </div>
-          <div class="two">
-            <div class="field">
-              <label>Password</label>
-              <input type="password" placeholder="Create password" required>
-            </div>
-            <div class="field">
-              <label>Confirm password</label>
-              <input type="password" placeholder="Repeat password" required>
-            </div>
-          </div>
-          <label class="remember terms"><input type="checkbox" required> I agree to the basic terms of HostelFix.</label>
-          <button class="submit" type="submit">Create Student Account</button>
-          <div class="message" id="registerMessage">Demo registration submitted successfully.</div>
-        </form>
-        <div class="switch-text">Already have an account?
-          <button onclick="showForm('login')">Login here</button>
-        </div>
-      </div>
-    </div>
-  </main>
+<div class="login-note">No real account or password is stored.</div>
+</div>
+</main>
 </div>
 
 <script>
-  function showForm(type){
-    const login = type === "login";
-    document.getElementById("loginForm").style.display = login ? "block" : "none";
-    document.getElementById("registerForm").style.display = login ? "none" : "block";
-    document.getElementById("loginTab").classList.toggle("active", login);
-    document.getElementById("registerTab").classList.toggle("active", !login);
-    document.getElementById("title").textContent = login ? "Welcome back" : "Create your account";
-    document.getElementById("subtitle").textContent = login
-      ? "Login to continue to your student account."
-      : "Enter your details to get started with HostelFix.";
-  }
+function showForm(type){
+const login=type==="login";
+document.getElementById("loginForm").style.display=login?"block":"none";
+document.getElementById("registerForm").style.display=login?"none":"block";
+document.getElementById("loginTab").classList.toggle("active",login);
+document.getElementById("registerTab").classList.toggle("active",!login);
+document.getElementById("title").textContent=login?"Welcome back":"Create your account";
+document.getElementById("subtitle").textContent=login?"Login to continue to your student account.":"Enter your details to get started with HostelFix.";
+}
 
-  function loginDemo(event){
-    event.preventDefault();
-    document.getElementById("loginMessage").style.display = "block";
-  }
+function loginDemo(event){
+event.preventDefault();
+document.getElementById("loginMessage").style.display="block";
+setTimeout(function(){window.location.href="dashboard.html";},500);
+}
 
-  function registerDemo(event){
-    event.preventDefault();
-    document.getElementById("registerMessage").style.display = "block";
-  }
+function registerDemo(event){
+event.preventDefault();
+const password=document.getElementById("registerPassword").value;
+const confirmPassword=document.getElementById("confirmPassword").value;
+if(password!==confirmPassword){
+alert("Passwords do not match. Please check again.");
+return;
+}
+document.getElementById("registerMessage").style.display="block";
+setTimeout(function(){window.location.href="dashboard.html";},500);
+}
 
-  const mode = window.location.hash.replace("#","");
-  if(mode === "register") showForm("register");
+const mode=window.location.hash.replace("#","").toLowerCase();
+showForm(mode==="register"?"register":"login");
 </script>
 </body>
 </html>
