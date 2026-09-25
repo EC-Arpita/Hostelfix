@@ -498,25 +498,6 @@ a {
     margin-top: 18px;
 }
 
-
-/* Tablet */
-
-@media (max-width: 850px) {
-
-    .sidebar {
-        width: 190px;
-    }
-
-    .stats {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-
 /* Mobile */
 
 @media (max-width: 600px) {

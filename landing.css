@@ -356,25 +356,6 @@ footer {
     justify-content: space-between;
 }
 
-
-/* Tablet */
-
-@media (max-width: 850px) {
-
-    .hero-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .grid4 {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .nav a:not(.btn) {
-        display: none;
-    }
-}
-
-
 /* Mobile */
 
 @media (max-width: 560px) {
